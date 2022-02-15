@@ -1,0 +1,11 @@
+version: 2
+
+sources:      
+  - name: TEST_SCHEMA_EXT_DEV
+    database: DEVELOPER_SANDBOX
+    schema: TEST_SCHEMA_EXT_DEV
+    quoting:
+      identifier: true
+    tables:
+      - name: DOORDASH_RAW
+      
