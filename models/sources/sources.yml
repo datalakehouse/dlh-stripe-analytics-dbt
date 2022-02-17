@@ -8,11 +8,15 @@ sources:
       identifier: true
     tables:
       - name: DOORDASH_RAW
+      - name: COUNTRY_CODES
+
   - name: WEATHER_SOURCE
-  description: Snowflake's sample weather data from marketplace
-  database: WEATHERSOURCE_TILE_SAMPLE_SNOWFLAKE_SECURE_SHARE_1622060371935
-  schema: STANDARD_TILE
-  tables:
-    - name: CLIMATOLOGY_DAY
-    - name: FORECAST_DAY
-    - name: HISTORY_DAY
+    description: Snowflake's sample weather data from marketplace
+    database: WEATHERSOURCE_TILE_SAMPLE_SNOWFLAKE_SECURE_SHARE_1622060371935
+    schema: STANDARD_TILE
+    tables:
+      - name: CLIMATOLOGY_DAY
+      - name: FORECAST_DAY
+      - name: HISTORY_DAY
+
+
