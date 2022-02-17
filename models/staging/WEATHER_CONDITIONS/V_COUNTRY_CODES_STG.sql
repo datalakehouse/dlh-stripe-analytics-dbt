@@ -1,5 +1,6 @@
  {{ config(
-    materialized='view'    
+    materialized='view',    
+    schema='DOORDASH'
 ) }}
 
 SELECT    
@@ -7,4 +8,4 @@ SELECT
     ALPHA2_CODE AS A_ALPHA2_COUNTRY_CODE,
     ALPHA3_CODE AS A_ALPHA3_COUNTRY_CODE
 FROM
-    {{source('TEST_SCHEMA_EXT_DEV','CONTRY_CODES')}}
+    {{source('TEST_SCHEMA_EXT_DEV','COUNTRY_CODES')}}

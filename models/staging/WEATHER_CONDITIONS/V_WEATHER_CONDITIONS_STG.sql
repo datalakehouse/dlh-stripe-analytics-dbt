@@ -1,5 +1,6 @@
  {{ config(
     materialized='view',
+    schema='DOORDASH',
     enabled=var('include_third_party_data_weather__weathersource')
 ) }}
 
@@ -74,8 +75,8 @@ SELECT
         WHEN H.AVG_TEMPERATURE_AIR_2M_F <= 32 THEN 'UNDER 32 F'
         WHEN H.AVG_TEMPERATURE_AIR_2M_F BETWEEN 32 AND 50 THEN '32 to 50 F'  
         WHEN H.AVG_TEMPERATURE_AIR_2M_F BETWEEN 50 AND 68  THEN '50 to 68 F'
-        WHEN H.AVG_TEMPERATURE_AIR_2M_F >= 68 'ABOVE 68 F'
-    END AS H.A_AVG_TEMPERATURE_SUMMARY
+        WHEN H.AVG_TEMPERATURE_AIR_2M_F >= 68 THEN 'ABOVE 68 F'
+    END AS A_AVG_TEMPERATURE_SUMMARY
 FROM
     {{source('WEATHER_SOURCE','HISTORY_DAY')}} H
 LEFT JOIN {{ ref('V_COUNTRY_CODES_STG') }} C ON C.A_ALPHA2_COUNTRY_CODE = H.COUNTRY
