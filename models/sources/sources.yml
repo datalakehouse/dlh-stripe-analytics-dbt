@@ -9,6 +9,7 @@ sources:
     tables:
       - name: DOORDASH_RAW
       - name: COUNTRY_CODES
+      - name: BUDGET_HIST
 
   - name: WEATHER_SOURCE
     description: Snowflake's sample weather data from marketplace

@@ -9,4 +9,4 @@
 SELECT
   *
 FROM
-  {{ref('V_BUDGET_STG')}} AS C
+  {{ref('V_BUDGET_HIST')}} AS C
