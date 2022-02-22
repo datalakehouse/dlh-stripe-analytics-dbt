@@ -21,6 +21,7 @@ SELECT DISTINCT
   ,H.START_DATE
   ,H.END_DATE
   , '{{invocation_id}}' as MD_INTGR_ID
+  , CURRENT_TIMESTAMP() MD_ELT_UPDATED_DTS
 FROM 
   budget_orders O
   INNER JOIN budget_hist H ON H.BUDGET_ID = O.K_BUDGET_BK
