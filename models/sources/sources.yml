@@ -11,7 +11,7 @@ sources:
       - name: COUNTRY_CODES
       - name: BUDGET_HIST
 
-  - name: WEATHER_SOURCE
+  - name: STANDARD_TILE
     description: Snowflake's sample weather data from marketplace
     database: WEATHERSOURCE_TILE_SAMPLE_SNOWFLAKE_SECURE_SHARE_1622060371935
     schema: STANDARD_TILE

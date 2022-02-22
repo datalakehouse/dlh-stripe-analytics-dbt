@@ -13,6 +13,7 @@ rename AS
 SELECT DISTINCT 
   MD5(CURRENCY) AS K_CURRENCY_DLHK
   ,CURRENCY AS K_CURRENCY_BK
+  , '{{invocation_id}}' as MD_INTGR_ID
 FROM 
   source
 WHERE

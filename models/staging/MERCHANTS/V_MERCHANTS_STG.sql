@@ -13,6 +13,7 @@ rename AS
 SELECT DISTINCT 
   MD5(MERCHANT) AS K_MERCHANT_DLHK
   ,MERCHANT AS A_MERCHANT_NAME  
+  , '{{invocation_id}}' as MD_INTGR_ID
 FROM 
   source
 WHERE
