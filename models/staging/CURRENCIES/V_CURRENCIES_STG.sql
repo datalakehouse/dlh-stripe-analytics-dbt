@@ -1,12 +1,12 @@
 {{ config (
   materialized= 'view',
-  schema= 'DOORDASH',
+  schema= var('target_schema'),
   tags= ["staging","daily"]
 )
 }}
 
 WITH source AS (
-  SELECT * FROM  {{source('TEST_SCHEMA_EXT_DEV','DOORDASH_RAW')}}
+  SELECT * FROM  {{source(var('source_schema'),'DOORDASH_RAW')}}
 ),
 rename AS 
 (

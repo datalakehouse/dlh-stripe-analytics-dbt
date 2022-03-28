@@ -1,16 +1,18 @@
 {{ config (
   materialized= 'view',
-  schema= 'DOORDASH',
+  schema= var('target_schema'),
   tags= ["staging","daily"]
 )
 }}
 
 WITH source AS (
-  SELECT * FROM  {{source('TEST_SCHEMA_EXT_DEV','DOORDASH_RAW')}}
+  SELECT * FROM  {{source(var('source_schema'),'DOORDASH_RAW')}}
 ),
+{% if var('include_third_party_data_weather__weathersource') %}
 weather AS (
   SELECT * FROM  {{ref('V_WEATHER_CONDITIONS_STG')}}
 ),
+{% endif %}
 delivery_address AS (
   SELECT * FROM  {{ ref('V_DELIVERY_ADDRESS_STG') }}
 ),
@@ -33,8 +35,10 @@ SELECT DISTINCT
   ,S.PICKUP_DELIVERY AS A_PICKUP_DELIVERY
   ,S.EXPENSE_CODE AS A_EXPENSE_CODE
   ,S.EXPENSE_NOTES AS A_EXPENSE_NOTE
+  {% if var('include_third_party_data_weather__weathersource') %}
   ,W.A_WEATHER_CONDITION_SUMMARY
   ,W.A_AVG_TEMPERATURE_SUMMARY
+  {% endif %}  
   ,ROUND(NVL(S.SUBTOTAL, 000), 2)::decimal(15,2) M_SUBTOTAL
   ,ROUND(NVL(S.TAX, 000), 2)::decimal(15,2) M_TAX
   ,ROUND(NVL(S.TIP, 000), 2)::decimal(15,2) M_TIP
@@ -53,7 +57,9 @@ SELECT DISTINCT
 FROM 
   source S
   LEFT JOIN delivery_address A ON A.K_DELIVERY_ADDRESS_DLHK = MD5(S.DELIVERY_ADDRESS)
+  {% if var('include_third_party_data_weather__weathersource') %}
   LEFT JOIN weather W on W.K_WEATHER_DLHK = MD5(A.K_COUNTRY_POSTALCODE_BK||'-'||TRIM(S.DELIVERY_DATE))
+  {% endif %}
   LEFT JOIN budget_hist B ON B.K_BUDGET_BK = S.BUDGET_ID AND S.DELIVERY_DATE >= B.START_DATE  AND (S.DELIVERY_DATE < B.END_DATE   OR B.END_DATE IS NULL)
 )
 

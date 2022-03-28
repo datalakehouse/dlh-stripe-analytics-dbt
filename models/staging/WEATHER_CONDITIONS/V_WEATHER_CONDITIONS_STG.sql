@@ -80,5 +80,5 @@ SELECT
     , '{{invocation_id}}' as MD_INTGR_ID
     , CURRENT_TIMESTAMP() MD_ELT_UPDATED_DTS
 FROM
-    {{source('STANDARD_TILE','HISTORY_DAY')}} H
+    {{source(var('source_weather_schema'),'HISTORY_DAY')}} H
 LEFT JOIN {{ ref('V_COUNTRY_CODES_STG') }} C ON C.A_ALPHA2_COUNTRY_CODE = H.COUNTRY

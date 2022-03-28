@@ -1,23 +1,19 @@
 version: 2
 
 sources:      
-  - name: TEST_SCHEMA_EXT_DEV
-    database: DEVELOPER_SANDBOX
-    schema: TEST_SCHEMA_EXT_DEV
+  - name: "{{ var('source_schema')}}"
+    database: "{{ var('source_database')}}"
+    schema: "{{ var('source_schema')}}"
     quoting:
       identifier: true
     tables:
-      - name: DOORDASH_RAW
-      - name: COUNTRY_CODES
-      - name: BUDGET_HIST
+      - name: DOORDASH_RAW      
 
-  - name: STANDARD_TILE
+  - name: "{{ var('source_weather_schema')}}"
     description: Snowflake's sample weather data from marketplace
-    database: WEATHERSOURCE_TILE_SAMPLE_SNOWFLAKE_SECURE_SHARE_1622060371935
-    schema: STANDARD_TILE
+    database: "{{ var('source_weather_database')}}"
+    schema: "{{ var('source_weather_schema')}}"
     tables:
-      - name: CLIMATOLOGY_DAY
-      - name: FORECAST_DAY
       - name: HISTORY_DAY
 
 

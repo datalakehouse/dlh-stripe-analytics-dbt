@@ -1,6 +1,6 @@
 {{ config (
   materialized= 'view',
-  schema= 'DOORDASH',
+  schema= var('target_schema'),
   tags= ["staging","daily"]
 )
 }}
@@ -9,7 +9,7 @@ WITH budget_orders AS (
   SELECT * FROM  {{ref('V_BUDGET_STG')}}
 ),
 budget_hist AS (
-    SELECT * FROM  {{source('TEST_SCHEMA_EXT_DEV','BUDGET_HIST')}}
+    SELECT * FROM  {{ref('BUDGET_HIST')}}
 ),
 rename AS 
 (
