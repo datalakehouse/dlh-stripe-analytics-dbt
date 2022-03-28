@@ -44,7 +44,7 @@ packages:
 Configuration
 -------------
 
-By default, this package uses `DEVELOPER_SANDBOX` as the source database and `DOORDASH` as source_schema. If this is not the where your salesforce data is, change ther below [variables](https://docs.getdbt.com/docs/using-variables) configuration on your `dbt_project.yml`:
+By default, this package uses `DEVELOPER_SANDBOX` as the source database and `TEST_SCHEMA_EXT_DEV` as source_schema. If this is not the where your salesforce data is, change ther below [variables](https://docs.getdbt.com/docs/using-variables) configuration on your `dbt_project.yml`:
 
 
 ```yaml
