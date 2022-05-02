@@ -9,4 +9,4 @@
 SELECT
   *
 FROM
-  {{ref('V_TEAM_ACCOUNTS_STG')}} AS C
+  {{ref('V_DDW_MERCHANTS_STG')}} AS C

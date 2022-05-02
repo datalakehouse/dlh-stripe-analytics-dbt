@@ -10,14 +10,14 @@ WITH source AS (
 ),
 {% if var('include_third_party_data_weather__weathersource') %}
 weather AS (
-  SELECT * FROM  {{ref('V_WEATHER_CONDITIONS_STG')}}
+  SELECT * FROM  {{ref('V_DDW_WEATHER_CONDITIONS_STG')}}
 ),
 {% endif %}
 delivery_address AS (
-  SELECT * FROM  {{ ref('V_DELIVERY_ADDRESS_STG') }}
+  SELECT * FROM  {{ ref('V_DDW_DELIVERY_ADDRESS_STG') }}
 ),
 budget_hist AS (
-  SELECT * FROM  {{ ref('W_BUDGET_D') }}
+  SELECT * FROM  {{ ref('W_DDW_BUDGET_D') }}
 ),
 rename AS 
 (

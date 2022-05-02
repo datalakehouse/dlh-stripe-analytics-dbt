@@ -9,4 +9,4 @@
 SELECT
   *
 FROM
-  {{ref('V_DELIVERY_ADDRESS_STG')}} AS C
+  {{ref('V_DDW_EMPLOYEES_STG')}} AS C

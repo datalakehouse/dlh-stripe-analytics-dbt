@@ -12,13 +12,13 @@ The primary ouputs of this package are fact and dimension tables as listed below
 
 |        Type       |        Model       |        Description       |
 |:----------------:|:----------------:|----------------|
-|Dimension| W_BUDGET_D       | To be imported as a seed csv file containing the budget applied for each budget_id   |
-|Dimension| W_CURRENCIES_D         | Based on all currencies applied to any orders |
-|Dimension| W_DELIVERY_ADDRESS_D       | Based on all delivery addresses ever used |
-|Dimension| W_EMPLOYEESS_D      | Based on all employees with at least one order |
-|Dimension| W_MERCHANTS_D         | Based on all merchants with at least one order |
-|Dimension| W_TEAM_ACCOUNTS_D         | Team accounts that has at least one order |
-|Fact| W_ORDERS_F | History of all orders |
+|Dimension| W_DDW_BUDGET_D       | To be imported as a seed csv file containing the budget applied for each budget_id   |
+|Dimension| W_DDW_CURRENCIES_D         | Based on all currencies applied to any orders |
+|Dimension| W_DDW_DELIVERY_ADDRESS_D       | Based on all delivery addresses ever used |
+|Dimension| W_DDW_EMPLOYEESS_D      | Based on all employees with at least one order |
+|Dimension| W_DDW_MERCHANTS_D         | Based on all merchants with at least one order |
+|Dimension| W_DDW_TEAM_ACCOUNTS_D         | Team accounts that has at least one order |
+|Fact| W_DDW_ORDERS_F | History of all orders |
 
 </br>
 
@@ -64,7 +64,7 @@ vars:
 Also, this project uses [Weather data ](https://www.snowflake.com/datasets/weather-source-llc-global-weather-climate-data-for-bi/)from Snowflake's marketplace to provide some insights about the weather conditions for each Doordash's order. If you're interested in this data, [pull weather marketplace data into your snowflake environment ](https://www.snowflake.com/datasets/weather-source-llc-global-weather-climate-data-for-bi/) and change the variables`source_weather_database` and `source_weather_database`above, pointing to your database and schema where the weather data is present.
 If you're not interest in weather data, just change the `include_third_party_data_weather__weathersource` to false. 
 
-Also, you may want have on your `W_ORDERS_F` the information if that order was below or above the budget. So, you will need to pull a CSV file with the budget configured for your company. There's a sample of that CSV file into [data](/data) folder. Replace the sample CSV file with your budget information.
+Also, you may want have on your `W_DDW_ORDERS_F` the information if that order was below or above the budget. So, you will need to pull a CSV file with the budget configured for your company. There's a sample of that CSV file into [data](/data) folder. Replace the sample CSV file with your budget information.
 
 ![AUlsWqQ.png](https://i.imgur.com/AUlsWqQ.png)
 BUDGET_ID = Id of the budget configured on Doordash for Work. All budget_ids can be found on `V_BUDGET_STG`.

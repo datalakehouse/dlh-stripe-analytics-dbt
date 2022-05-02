@@ -6,7 +6,7 @@
 }}
 
 WITH budget_orders AS (
-  SELECT * FROM  {{ref('V_BUDGET_STG')}}
+  SELECT * FROM  {{ref('V_DDW_BUDGET_STG')}}
 ),
 budget_hist AS (
     SELECT * FROM  {{ref('BUDGET_HIST')}}

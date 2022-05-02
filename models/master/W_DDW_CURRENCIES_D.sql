@@ -9,4 +9,4 @@
 SELECT
   *
 FROM
-  {{ref('V_MERCHANTS_STG')}} AS C
+  {{ref('V_DDW_CURRENCIES_STG')}} AS C
