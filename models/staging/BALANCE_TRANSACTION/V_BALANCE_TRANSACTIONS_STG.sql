@@ -1,0 +1,36 @@
+{{ config (
+  materialized= 'view',
+  schema= var('target_schema'),
+  tags= ["staging","daily"]
+)
+}}
+
+WITH balance_transaction AS (
+  SELECT * FROM  {{source(var('source_schema', 'DEMO_STRIPE_NEW'), 'BALANCE_TRANSACTION')}}
+),
+rename AS 
+(
+SELECT  
+  MD5(T.ID) AS K_BALANCE_TRANSACTION_DLHK  
+  ,T.ID AS K_BALANCE_TRANSACTION_BK
+  --ATTRIBUTES
+  ,T.AVAILABLE_ON AS A_AVAILABLE_ON
+  ,T.CREATED::TIMESTAMP AS A_CREATED_AT
+  ,T.CURRENCY AS A_CURRENCY
+  ,T.DESCRIPTION AS A_DESCRIPTION
+  ,T.REPORTING_CATEGORY AS A_REPORTING_CATEGORY
+  ,T.SOURCE AS A_SOURCE
+  ,T.STATUS AS A_STATUS
+  ,T.TRANSACTION_TYPE AS A_TRANSACTION_TYPE
+  --METRICS
+  ,T.AMOUNT AS M_AMOUNT
+  ,T.EXCHANGE_RATE AS M_EXCHANGE_RATE
+  ,T.NET AS M_NET
+  --METADATA
+  , '{{invocation_id}}' as MD_INTGR_ID
+  , CURRENT_TIMESTAMP() MD_ELT_UPDATED_DTS
+FROM 
+  balance_transaction T
+)
+
+SELECT * FROM rename

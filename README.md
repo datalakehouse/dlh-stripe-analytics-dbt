@@ -85,3 +85,4 @@ Additional contributions to this package are very welcome! Please create issues 
 *   Check it out and :star: [the datalakehouse core repository](https://github.com/datalakehouse/datalakehouse-core);
 
 
+# dlh-stripe-analytics-dbt

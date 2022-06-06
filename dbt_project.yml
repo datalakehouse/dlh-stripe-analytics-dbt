@@ -2,7 +2,7 @@
 # Name your project! Project names should contain only lowercase characters
 # and underscores. A good package name should reflect your organization's
 # name or the intended use of these models
-name: 'dlh_doordash'
+name: 'dlh_stripe'
 version: '0.1.0'
 config-version: 2
 
@@ -26,19 +26,12 @@ clean-targets:         # directories to be removed by `dbt clean`
     - "dbt_modules"
 
 vars:    
-    include_third_party_data_weather__weathersource: true
     source_database: DEVELOPER_SANDBOX
-    target_schema: DOORDASH
-    source_schema: TEST_SCHEMA_EXT_DEV
-    source_weather_database: WEATHERSOURCE_TILE_SAMPLE_SNOWFLAKE_SECURE_SHARE_1622060371935
-    source_weather_schema: STANDARD_TILE
-
+    target_schema: STRIPE
+    source_schema: DEMO_STRIPE
 
 models:
-  dlh_doordash:
+  dlh_stripe:
 
-seeds:
-  dlh_doordash:
-    schema: DOORDASH
 
 
