@@ -1,9 +1,9 @@
 version: 2
 
 sources:      
-  - name: "{{ var('source_schema', 'DEMO_STRIPE_NEW')}}"
-    database: "{{ var('source_database', 'DEVELOPER_SANDBOX')}}"
-    schema: "{{ var('source_schema', 'DEMO_STRIPE_NEW')}}"
+  - name: "{{ var('source_schema','DEMO_STRIPE')}}"
+    database: "{{ var('source_database','DEVELOPER_SANDBOX')}}"
+    schema: "{{ var('source_schema','DEMO_STRIPE')}}"
     quoting:
       identifier: true
     tables:
@@ -14,9 +14,9 @@ sources:
       - name: PAYMENT_METHOD
       - name: PAYMENT_METHOD_CARD
       - name: PAYOUT
-      #- name: REFUND
-      #- name: CARD
-      #- name: PLANS
+      - name: REFUND
+      - name: CARD
+      - name: PLANS
       - name: INVOICE
       - name: INVOICE_LINE_ITEM
       - name: SUBSCRIPTION
@@ -25,3 +25,5 @@ sources:
       - name: ORDER_ITEM
       - name: ORDER_RETURN
       - name: ORDER_RETURN_ITEM
+      - name: CREDIT_NOTE
+      - name: CREDIT_NOTE_LINE_ITEM
