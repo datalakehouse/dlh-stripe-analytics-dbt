@@ -29,11 +29,13 @@ SELECT
     ,payment_intent.K_PAYMENT_INTENT_DLHK
     ,charge.K_PAYMENT_METHOD_DLHK
     ,payout.K_PAYOUT_DLHK
+    ,COALESCE(charge.K_CUSTOMER_DLHK,charge_refund.K_CUSTOMER_DLHK) AS K_CHARGE_CUSTOMER_DLHK
     ,charge.K_PAYMENT_METHOD_BK
     ,charge.K_CHARGE_BK
     ,payment_intent.K_PAYMENT_INTENT_BK
-    ,payout.K_PAYOUT_BK    
+    ,payout.K_PAYOUT_BK
     ,balance_transactions.K_BALANCE_TRANSACTION_BK
+    ,COALESCE(charge.K_CUSTOMER_BK,charge_refund.K_CUSTOMER_BK) AS K_CHARGE_CUSTOMER_BK
     ,balance_transactions.A_CREATED_AT    
     ,balance_transactions.K_SOURCE_BK
     ,balance_transactions.A_AVAILABLE_ON    
@@ -52,16 +54,15 @@ SELECT
         WHEN balance_transactions.A_TRANSACTION_TYPE in ('transfer', 'recipient_transfer') then 'transfer'
         WHEN balance_transactions.A_TRANSACTION_TYPE in ('transfer_cancel', 'transfer_failure', 'recipient_transfer_cancel', 'recipient_transfer_failure') then 'transfer_reversal'
         ELSE balance_transactions.A_TRANSACTION_TYPE
-    END as A_REPORTING_TRANSACTION_CATEGORY
-    ,CASE WHEN balance_transactions.A_TRANSACTION_TYPE = 'charge' then charge.M_AMOUNT end as M_CUSTOMER_FACING_AMOUNT
-    ,CASE WHEN balance_transactions.A_TRANSACTION_TYPE = 'charge' then charge.A_CURRENCY end as A_CUSTOMER_FACING_CURRENCY
-    ,COALESCE(charge.K_CUSTOMER_DLHK,charge_refund.K_CUSTOMER_DLHK) AS K_CHARGE_CUSTOMER_DLHK    
+    END as A_REPORTING_TRANSACTION_CATEGORY    
     ,charge.A_RECEIPT_EMAIL    
     ,charge.A_CREATED_AT as A_CHARGE_CREATED_AT    
     ,payout.A_ARRIVAL_DATE as A_PAYOUT_EXPECTED_ARRIVAL_DATE
     ,payout.A_STATUS as A_PAYOUT_STATUS
     ,payout.A_TYPE as A_PAYOUT_TYPE
     ,payout.A_DESCRIPTION as A_PAYOUT_DESCRIPTION
+    ,refund.A_CREATED_AT as A_REFUND_CREATED_AT
+    ,refund.A_STATUS as A_REFUND_STATUS
     ,refund.A_REASON as A_REFUND_REASON
 FROM balance_transactions
 

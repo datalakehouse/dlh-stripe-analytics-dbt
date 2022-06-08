@@ -1,0 +1,42 @@
+{{ config (
+  materialized= 'view',
+  schema= var('target_schema'),
+  tags= ["staging","daily"]
+)
+}}
+
+WITH plan AS (
+  SELECT * FROM  {{source(var('source_schema', 'DEMO_STRIPE_NEW'), 'PLAN')}}
+),
+rename AS 
+(
+SELECT  
+  --DLHK   
+  MD5(plan.ID) AS K_PLAN_DLHK
+  ,plan.ID AS K_PLAN_BK
+  ,plan.PRODUCT_ID AS K_PRODUCT_BK
+  ,plan.AGGREGATE_USAGE AS A_AGGREGATE_USAGE
+  ,plan.BILLING_SCHEME AS A_BILLING_SCHEME
+  ,plan.CREATED AS A_CREATED_AT
+  ,plan.CURRENCY AS A_CURRENCY
+  ,plan.INTERVAL AS A_INTERVAL
+  ,plan.NICKNAME AS A_NICKNAME
+  ,plan.TRANSFORM_USAGE_ROUND AS A_TRANSFORM_USAGE_ROUND
+  ,plan.USAGE_TYPE AS A_USAGE_TYPE
+  ,plan.TRANSFORM_USAGE_DIVIDE_BY AS A_TRANSFORM_USAGE_DIVIDE_BY
+  --BOOLEAN
+  ,plan.ACTIVE AS B_ACTIVE
+  ,plan.IS_DELETED AS B_IS_DELETED
+  ,plan.LIVEMODE AS B_LIVEMODE  
+  --METRICS
+  ,plan.AMOUNT AS M_AMOUNT
+  ,plan.INTERVAL_COUNT AS M_INTERVAL_COUNT
+  ,plan.TRIAL_PERIOD_DAYS AS M_TRIAL_PERIOD_DAYS
+  --METADATA
+  , '{{invocation_id}}' as MD_INTGR_ID
+  , CURRENT_TIMESTAMP() MD_ELT_UPDATED_DTS
+FROM 
+  plan  
+)
+
+SELECT * FROM rename
