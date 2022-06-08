@@ -1,4 +1,4 @@
-# Doordash package
+# Stripe package
 
 This dbt package:
 
