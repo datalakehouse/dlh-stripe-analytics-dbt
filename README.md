@@ -2,7 +2,7 @@
 
 This dbt package:
 
-*   Contains a DBT dimensional model based on Doordash for work data from [Datalakehouse’s](https://www.datalakehouse.io/) connector.
+*   Contains a DBT dimensional model based on Stripe data from [Datalakehouse’s](https://www.datalakehouse.io/) connector.
 *   The main use of this package is to provide a stable snowflake dimensional model that will provide useful insights.
     
 
@@ -12,21 +12,18 @@ The primary ouputs of this package are fact and dimension tables as listed below
 
 |        Type       |        Model       |        Description       |
 |:----------------:|:----------------:|----------------|
-|Dimension| W_DDW_BUDGET_D       | To be imported as a seed csv file containing the budget applied for each budget_id   |
-|Dimension| W_DDW_CURRENCIES_D         | Based on all currencies applied to any orders |
-|Dimension| W_DDW_DELIVERY_ADDRESS_D       | Based on all delivery addresses ever used |
-|Dimension| W_DDW_EMPLOYEESS_D      | Based on all employees with at least one order |
-|Dimension| W_DDW_MERCHANTS_D         | Based on all merchants with at least one order |
-|Dimension| W_DDW_TEAM_ACCOUNTS_D         | Team accounts that has at least one order |
-|Fact| W_DDW_ORDERS_F | History of all orders |
+|Fact| W_STR_BALANCE_TRANSACTION_F       | Balance transactions represent funds moving through your Stripe account. They're created for every type of transaction that comes into or flows out of your Stripe account balance.   |
+|Fact| W_STR_CREDIT_NOTES_F         | Issue a credit note to adjust an invoice's amount after the invoice is finalized. |
+|Fact| W_STR_INVOICES_F       | Invoices are statements of amounts owed by a customer, and are either generated one-off, or generated periodically from a subscription. |
+|Fact| W_STR_SUBSCRIPTION_F      | Subscriptions allow you to charge a customer on a recurring basis. |
+|Fact| W_STR_SUBSCRIPTION_TOTALS_F         | Reporting table with daily, weekly and monthly timeframe for active subscriptions by plan over period. |
+|Dimension| W_STR_CUSTOMERS_D         | Represents a customer of your business. It lets you create recurring charges and track payments that belong to the same customer. |
+|Dimension| W_STR_DATE_D | Date dimension |
+|Dimension| W_STR_PAYMENT_METHOD_D | Represent your customer's payment instruments. |
+|Dimension| W_STR_PLAN_D | Plans define the base price, currency, and billing cycle for recurring purchases of products. |
 
 </br>
 
-</br>
-
-![oi1UZGn.jpg](https://i.imgur.com/oi1UZGn.jpg)| 
-|:--:| 
-| *Data Lineage Graph* |
 
 Installation Instructions
 -------------------------
@@ -37,14 +34,14 @@ Include in your packages.yml
 
 ```yaml
 packages:
-  - package: datalakehouse/dlh-doordash-analytics-dbt
+  - package: datalakehouse/dlh-stripe-analytics-dbt
     version: [">=0.1.0"]
 ```
 
 Configuration
 -------------
 
-By default, this package uses `DEVELOPER_SANDBOX` as the source database and `TEST_SCHEMA_EXT_DEV` as source_schema. If this is not the where your salesforce data is, change ther below [variables](https://docs.getdbt.com/docs/using-variables) configuration on your `dbt_project.yml`:
+By default, this package uses `DEVELOPER_SANDBOX` as the source database and `DEMO_STRIPE_NEW` as source_schema. If this is not the where your salesforce data is, change ther below [variables](https://docs.getdbt.com/docs/using-variables) configuration on your `dbt_project.yml`:
 
 
 ```yaml
@@ -53,21 +50,10 @@ By default, this package uses `DEVELOPER_SANDBOX` as the source database and `TE
 ...
 
 vars:    
-    include_third_party_data_weather__weathersource: true
     source_database: DEVELOPER_SANDBOX
-    target_schema: DOORDASH
-    source_schema: TEST_SCHEMA_EXT_DEV
-    source_weather_database: WEATHERSOURCE_TILE_SAMPLE_SNOWFLAKE_SECURE_SHARE_1622060371935
-    source_weather_schema: STANDARD_TILE
+    target_schema: STRIPE
+    source_schema: DEMO_STRIPE_NEW
 ```
-
-Also, this project uses [Weather data ](https://www.snowflake.com/datasets/weather-source-llc-global-weather-climate-data-for-bi/)from Snowflake's marketplace to provide some insights about the weather conditions for each Doordash's order. If you're interested in this data, [pull weather marketplace data into your snowflake environment ](https://www.snowflake.com/datasets/weather-source-llc-global-weather-climate-data-for-bi/) and change the variables`source_weather_database` and `source_weather_database`above, pointing to your database and schema where the weather data is present.
-If you're not interest in weather data, just change the `include_third_party_data_weather__weathersource` to false. 
-
-Also, you may want have on your `W_DDW_ORDERS_F` the information if that order was below or above the budget. So, you will need to pull a CSV file with the budget configured for your company. There's a sample of that CSV file into [data](/data) folder. Replace the sample CSV file with your budget information.
-
-![AUlsWqQ.png](https://i.imgur.com/AUlsWqQ.png)
-BUDGET_ID = Id of the budget configured on Doordash for Work. All budget_ids can be found on `V_BUDGET_STG`.
 
 ### Database support
 
@@ -83,7 +69,3 @@ Additional contributions to this package are very welcome! Please create issues 
 
 *   Fork and :star: this repository :)
 *   Check it out and :star: [the datalakehouse core repository](https://github.com/datalakehouse/datalakehouse-core);
-
-
-# dlh-stripe-analytics-dbt
-# dlh-stripe-analytics-dbt

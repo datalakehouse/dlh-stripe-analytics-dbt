@@ -43,7 +43,7 @@ SELECT
   , '{{invocation_id}}' as MD_INTGR_ID
   , CURRENT_TIMESTAMP() MD_ELT_UPDATED_DTS
 FROM 
-  customer C
+  customer 
 )
 
 SELECT * FROM rename

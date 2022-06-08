@@ -1,9 +1,9 @@
 version: 2
 
 sources:      
-  - name: "{{ var('source_schema','DEMO_STRIPE')}}"
+  - name: "{{ var('source_schema','DEMO_STRIPE_NEW')}}"
     database: "{{ var('source_database','DEVELOPER_SANDBOX')}}"
-    schema: "{{ var('source_schema','DEMO_STRIPE')}}"
+    schema: "{{ var('source_schema','DEMO_STRIPE_NEW')}}"
     quoting:
       identifier: true
     tables:
@@ -16,7 +16,8 @@ sources:
       - name: PAYOUT
       - name: REFUND
       - name: CARD
-      - name: PLANS
+      - name: PLAN
+      - name: PRODUCT
       - name: INVOICE
       - name: INVOICE_LINE_ITEM
       - name: SUBSCRIPTION

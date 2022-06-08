@@ -25,10 +25,11 @@ clean-targets:         # directories to be removed by `dbt clean`
     - "target"
     - "dbt_modules"
 
-vars:    
-    source_database: DEVELOPER_SANDBOX
+vars:   
+    
     target_schema: STRIPE
     source_schema: DEMO_STRIPE_NEW
+    source_database: DEVELOPER_SANDBOX
 
 models:
   dlh_stripe:
