@@ -36,14 +36,15 @@ SELECT
     ,payout.K_PAYOUT_BK
     ,balance_transactions.K_BALANCE_TRANSACTION_BK
     ,COALESCE(charge.K_CUSTOMER_BK,charge_refund.K_CUSTOMER_BK) AS K_CHARGE_CUSTOMER_BK
-    ,balance_transactions.A_CREATED_AT    
+    ,balance_transactions.A_CREATED_AT
+    ,balance_transactions.A_CREATED_AT::DATE AS A_CREATED_DATE_AT
     ,balance_transactions.K_SOURCE_BK
-    ,balance_transactions.A_AVAILABLE_ON    
-    ,balance_transactions.A_CURRENCY
+    ,balance_transactions.A_AVAILABLE_ON        
     ,balance_transactions.A_DESCRIPTION
     ,balance_transactions.A_REPORTING_CATEGORY
     ,balance_transactions.A_STATUS
     ,balance_transactions.A_TRANSACTION_TYPE
+    ,balance_transactions.A_CURRENCY
     ,balance_transactions.M_AMOUNT
     ,balance_transactions.M_EXCHANGE_RATE
     ,balance_transactions.M_NET
@@ -57,11 +58,13 @@ SELECT
     END as A_REPORTING_TRANSACTION_CATEGORY    
     ,charge.A_RECEIPT_EMAIL    
     ,charge.A_CREATED_AT as A_CHARGE_CREATED_AT    
+    ,charge.A_CREATED_DATE_AT as A_CHARGE_CREATED_DATE_AT    
     ,payout.A_ARRIVAL_DATE as A_PAYOUT_EXPECTED_ARRIVAL_DATE
     ,payout.A_STATUS as A_PAYOUT_STATUS
     ,payout.A_TYPE as A_PAYOUT_TYPE
     ,payout.A_DESCRIPTION as A_PAYOUT_DESCRIPTION
     ,refund.A_CREATED_AT as A_REFUND_CREATED_AT
+    ,refund.A_CREATED_AT::DATE as A_REFUND_CREATED_DATE_AT
     ,refund.A_STATUS as A_REFUND_STATUS
     ,refund.A_REASON as A_REFUND_REASON
 FROM balance_transactions

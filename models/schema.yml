@@ -1,0 +1,160 @@
+version: 2
+
+
+
+models:  
+
+  - name:   W_STR_CUSTOMER_D
+    description: This is the customers dimension table
+    columns:
+      - name: K_CUSTOMER_DLHK        
+        tests:
+          - unique
+          - not_null
+        description: DataLakeHouse key of the customer   
+
+  - name:   W_STR_DATE_D
+    description: This is the dates dimension table
+    columns:
+      - name: K_DATE_INTEGER_BK        
+        tests:
+          - unique
+          - not_null
+        description: Date Key
+ 
+  - name:   W_STR_PAYMENT_METHOD_D
+    description: This is the payment method dimension table
+    columns:
+      - name: K_PAYMENT_METHOD_DLHK
+        tests:
+          - unique
+          - not_null
+        description: DateLakeHouse key of the payment method
+
+  - name:   W_STR_PLAN_D
+    description: This is the plan dimension table
+    columns:
+      - name: K_PLAN_DLHK        
+        tests:
+          - unique
+          - not_null
+        description: DateLakeHouse key of the plan
+ 
+  - name:   W_STR_BALANCE_TRANSACTION_F
+    description: This is the balance transactions fact table
+    columns:
+      - name: K_BALANCE_TRANSACTION_DLHK        
+        tests:
+          - unique
+          - not_null
+        description: DataLakeHouse key of the balance transaction
+      - name: K_STR_PAYMENT_METHOD_DLHK   
+        tests:
+          - relationships:
+              to: ref('W_STR_PAYMENT_METHOD_D')
+              field: K_PAYMENT_METHOD_DLHK       
+      - name: K_CHARGE_CUSTOMER_DLHK
+        tests:      
+          - relationships:
+              to: ref('W_STR_CUSTOMER_D')
+              field: K_CUSTOMER_DLHK  
+      - name: A_CREATED_DATE_AT
+        tests:      
+          - relationships:
+              to: ref('W_STR_DATE_D')
+              field: K_DATE_BK
+
+  - name:   W_STR_CREDIT_NOTES_F
+    description: This is the credit notes fact table
+    columns:
+      - name: K_CREDIT_NOTE_DLHK        
+        tests:
+          - unique
+          - not_null
+        description: DataLakeHouse key of the credit note
+    
+      - name: K_CUSTOMER_DLHK
+        tests:      
+          - relationships:
+              to: ref('W_STR_CUSTOMER_D')
+              field: K_CUSTOMER_DLHK  
+      - name: A_CREATED_DATE_AT
+        tests:      
+          - relationships:
+              to: ref('W_STR_DATE_D')
+              field: K_DATE_BK
+
+  - name:   W_STR_INVOICE_F
+    description: This is the invoices fact table
+    columns:
+      - name: K_INVOICE_LINE_ITEM_DLHK        
+        tests:
+          - unique
+          - not_null
+        description: DateLakeHouse key of the invoice fact
+
+      - name: K_CUSTOMER_DLHK
+        tests:      
+          - relationships:
+              to: ref('W_STR_CUSTOMER_D')
+              field: K_CUSTOMER_DLHK  
+      - name: K_PLAN_DLHK
+        tests:      
+          - relationships:
+              to: ref('W_STR_PLAN_D')
+              field: K_PLAN_DLHK
+      - name: A_INVOICE_CREATED_DATE_AT
+        tests:      
+          - relationships:
+              to: ref('W_STR_DATE_D')
+              field: K_DATE_BK
+
+  - name:   W_STR_SUBSCRIPTION_BY_PLAN_F
+    description: This is the subscription by plan  fact table
+    columns:
+      - name: K_SUBSCRIPTION_BY_PLAN_DLHK        
+        tests:
+          - unique
+          - not_null
+        description: DateLakeHouse key of the subscription by plan fact table
+
+      - name: K_CUSTOMER_DLHK
+        tests:      
+          - relationships:
+              to: ref('W_STR_CUSTOMER_D')
+              field: K_CUSTOMER_DLHK  
+      - name: K_PLAN_DLHK
+        tests:      
+          - relationships:
+              to: ref('W_STR_PLAN_D')
+              field: K_PLAN_DLHK
+      - name: A_DATE_REF
+        tests:      
+          - relationships:
+              to: ref('W_STR_DATE_D')
+              field: K_DATE_BK
+
+  - name:   W_STR_SUBSCRIPTION_F
+    description: This is the dates dimension table
+    columns:
+      - name: K_SUBSCRIPTION_ITEM_DLHK        
+        tests:
+          - unique
+          - not_null
+        description: DateLakeHouse key of the subscription fact table
+
+      - name: K_CUSTOMER_DLHK
+        tests:      
+          - relationships:
+              to: ref('W_STR_CUSTOMER_D')
+              field: K_CUSTOMER_DLHK  
+      - name: K_PLAN_DLHK
+        tests:      
+          - relationships:
+              to: ref('W_STR_PLAN_D')
+              field: K_PLAN_DLHK
+      - name: A_ITEM_CREATED_DATE_AT
+        tests:      
+          - relationships:
+              to: ref('W_STR_DATE_D')
+              field: K_DATE_BK

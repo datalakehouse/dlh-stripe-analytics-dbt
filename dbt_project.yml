@@ -28,7 +28,7 @@ clean-targets:         # directories to be removed by `dbt clean`
 vars:   
     
     target_schema: STRIPE
-    source_schema: DEMO_STRIPE_NEW
+    source_schema: DEMO_STRIPE
     source_database: DEVELOPER_SANDBOX
 
 models:
