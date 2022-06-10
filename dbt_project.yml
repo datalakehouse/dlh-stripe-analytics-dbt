@@ -9,6 +9,7 @@ config-version: 2
 # This setting configures which "profile" dbt uses for this project.
 profile: 'snowflake_aicg'
 
+require-dbt-version: ">=0.21.0"
 
 # These configurations specify where dbt should look for different types of files.
 # The `source-paths` config, for example, states that models in this project can be
@@ -25,11 +26,10 @@ clean-targets:         # directories to be removed by `dbt clean`
     - "target"
     - "dbt_modules"
 
-vars:   
-    
-    target_schema: STRIPE
-    source_schema: DEMO_STRIPE
-    source_database: DEVELOPER_SANDBOX
+# vars:    
+#     target_schema: STRIPE
+#     source_schema: DEMO_STRIPE
+#     source_database: DEVELOPER_SANDBOX
 
 models:
   dlh_stripe:

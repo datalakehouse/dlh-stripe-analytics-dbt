@@ -16,7 +16,7 @@ The primary ouputs of this package are fact and dimension tables as listed below
 |Fact| W_STR_CREDIT_NOTES_F         | Issue a credit note to adjust an invoice's amount after the invoice is finalized. |
 |Fact| W_STR_INVOICES_F       | Invoices are statements of amounts owed by a customer, and are either generated one-off, or generated periodically from a subscription. |
 |Fact| W_STR_SUBSCRIPTION_F      | Subscriptions allow you to charge a customer on a recurring basis. |
-|Fact| W_STR_SUBSCRIPTION_TOTALS_F         | Reporting table with daily, weekly and monthly timeframe for active subscriptions by plan over period. |
+|Fact| W_STR_SUBSCRIPTION_BY_PLAN_F         | Reporting table with daily, weekly and monthly timeframe for active subscriptions by plan over period. |
 |Dimension| W_STR_CUSTOMERS_D         | Represents a customer of your business. It lets you create recurring charges and track payments that belong to the same customer. |
 |Dimension| W_STR_DATE_D | Date dimension |
 |Dimension| W_STR_PAYMENT_METHOD_D | Represent your customer's payment instruments. |
@@ -24,6 +24,9 @@ The primary ouputs of this package are fact and dimension tables as listed below
 
 </br>
 
+![3vJH8CW.png](https://i.imgur.com/3vJH8CW.png)
+|:--:| 
+| *Data Lineage Graph* |
 
 Installation Instructions
 -------------------------
@@ -41,7 +44,8 @@ packages:
 Configuration
 -------------
 
-By default, this package uses `DEVELOPER_SANDBOX` as the source database and `DEMO_STRIPE_NEW` as source_schema. If this is not the where your salesforce data is, change ther below [variables](https://docs.getdbt.com/docs/using-variables) configuration on your `dbt_project.yml`:
+
+By default, this package uses `DEVELOPER_SANDBOX` as the source database name and `DEMO_STRIPE_NEW` as schema name. If this is not the where your salesforce data is, add the below [variables](https://docs.getdbt.com/docs/using-variables) to your `dbt_project.yml`:
 
 
 ```yaml
