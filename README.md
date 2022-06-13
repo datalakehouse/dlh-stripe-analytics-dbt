@@ -37,7 +37,7 @@ Include in your packages.yml
 
 ```yaml
 packages:
-  - package: datalakehouse/dlh-stripe-analytics-dbt
+  - package: datalakehouse/dlh-stripe
     version: [">=0.1.0"]
 ```
 
