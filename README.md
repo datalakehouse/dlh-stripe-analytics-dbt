@@ -3,7 +3,7 @@
 This dbt package:
 
 *   Contains a DBT dimensional model based on Stripe data from [DataLakeHouse.io](https://www.datalakehouse.io/)  connector.
-*   The main use of this package is to provide a stable snowflake dimensional model that will provide useful insights.
+*   The main use of this package is to provide a stable Snowflake dimensional model that will provide useful insights.
     
 
 ### Models
@@ -45,7 +45,7 @@ Configuration
 -------------
 
 
-By default, this package uses `DEVELOPER_SANDBOX` as the source database name and `DEMO_STRIPE_NEW` as schema name. If this is not the where your salesforce data is, add the below [variables](https://docs.getdbt.com/docs/using-variables) to your `dbt_project.yml`:
+By default, this package uses `DEVELOPER_SANDBOX` as the source database name and `DEMO_STRIPE_NEW` as schema name. If this is not the where your Stripe data is, add the below [variables](https://docs.getdbt.com/docs/using-variables) to your `dbt_project.yml`:
 
 
 ```yaml
@@ -72,4 +72,4 @@ Additional contributions to this package are very welcome! Please create issues 
 
 
 *   Fork and :star: this repository :)
-*   Check it out and :star: [the datalakehouse core repository](https://github.com/datalakehouse/datalakehouse-core);
+*   Check it out and :star: [the DataLakeHouse.io core repository](https://github.com/datalakehouse/datalakehouse-core);
